@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="a0ce9172-956a-4cfe-b910-269e759259a8" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<flow name="muletest1Flow" doc:id="0391c2c3-0ebf-451c-83b7-e543de630d0b" >
+		<http:listener doc:name="Listener" doc:id="b677a99a-26f0-4dcf-a15f-756a67f20e06" config-ref="HTTP_Listener_config" path="/test1"/>
+		<logger level="INFO" doc:name="Processing Started " doc:id="c0e7a2c7-c675-4595-b4e4-1cb49349d151" message="**** Processing Started  ****"/>
+		<ee:transform doc:name="Transform Message" doc:id="5bff87bc-b2d7-4d47-a52d-ec655d9499ce" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+"Hi This is test1"]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+	</flow>
+</mule>
