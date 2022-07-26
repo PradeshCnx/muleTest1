@@ -11,6 +11,14 @@ pipeline{
 			steps{
 				git branch: 'devlop', credentialsId: 'cabbdcc2-ae95-42d9-a016-50786bff5726', url: 'https://github.com/PradeshCnx/muleTest1.git'
 				bat "mvn -Dmaven.test.failure.ignore-true clean test"
+				publishHTML target:{
+					allowMissing: false,
+					alwaysLinkToLastBuild: false,
+					keepAll: true,
+					reportDir: 'target/site/munit/coverage',
+					reportFiles: 'summary.html',
+					reportName: "Munit Coverage report"
+				}
 			}
 		}
 		stage('Deploy'){
