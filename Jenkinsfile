@@ -7,12 +7,7 @@ pipeline{
 				bat "mvn -Dmaven.test.failure.ignore-true clean package"
 			}
 		}
-		stage('Munit Testing'){
-			steps{
-				git branch: 'devlop', credentialsId: 'cabbdcc2-ae95-42d9-a016-50786bff5726', url: 'https://github.com/PradeshCnx/muleTest1.git'
-				bat "mvn -Dmaven.test.failure.ignore=true clean test"
-			}
-		}
+		
 		stage('Deploy'){
 			steps{
 				git branch: 'devlop', credentialsId: 'cabbdcc2-ae95-42d9-a016-50786bff5726', url: 'https://github.com/PradeshCnx/muleTest1.git'
